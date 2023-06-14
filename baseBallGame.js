@@ -8,8 +8,11 @@ const answerLength = 3; //3개
 const answerNumber = () => {
   let answer = [];
   for (let i = 0; i < answerLength; i++) {
-    answer.push(~~(Math.random() * 10));
+    let randNum = ~~(Math.random() * 10);
+    if (answer.includes(randNum)) i--;
+    else answer.push(randNum);
   }
+  console.log(`answer: ${answer}`);
   return answer.join("");
 };
 
