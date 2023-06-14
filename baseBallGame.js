@@ -4,8 +4,8 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-const answerLength = 3; //3개
-const answerNumber = () => {
+const answerLength = 3;
+const generateRandomNumber = () => {
   let answer = [];
   for (let i = 0; i < answerLength; i++) {
     answer.push(~~(Math.random() * 10));
@@ -13,48 +13,32 @@ const answerNumber = () => {
   return answer.join("");
 };
 
-const replyCheck = (input, answer) => {
-  let s = 0;
-  let b = 0;
+const checkAnswer = (input, answer) => {
+  let S = 0;
+  let B = 0;
   for (let i = 0; i < answerLength; i++) {
-    if (input[i] === answer[i]) s++;
-    else if (answer.includes(input[i])) b++;
+    if (input[i] === answer[i]) S++;
+    else if (answer.includes(input[i])) B++;
   }
-  return { s, b };
+  return { S, B };
 };
 
-let answer = answerNumber(); //최종 답
-// console.log(`answer: ${answer}`);
-let turn = 1; //몇번째인지 나타내주는 변수
+let answer = generateRandomNumber();
+let attempts = 1;
 
-console.log("컴퓨터가 숫자를 생성하였습니다. 답을 맞춰보세요!");
+console.log("💻 컴퓨터가 숫자를 생성하였습니다. 답을 맞춰보세요!");
 
-process.stdout.write(`${turn}번째 시도: `);
+process.stdout.write(`${attempts}번째 시도: `);
+
 rl.on("line", (input) => {
-  let { s, b } = replyCheck(input, answer);
-  if (s === answerLength) {
-    console.log(`${turn}번만에 맞히셨습니다.`);
-    console.log("게임을 종료합니다");
+  let { S, B } = checkAnswer(input, answer);
+  if (S === answerLength) {
+    console.log(`🎉 ${attempts}번만에 맞히셨습니다.
+게임을 종료합니다.`);
     rl.close();
   } else {
-    console.log(`${b}B${s}S`);
-    turn++;
-    process.stdout.write(`${turn}번째 시도: `);
+    console.log(`⚾️${S}S ${B}B`);
+    attempts++;
+    process.stdout.write(`${attempts}번째 시도: `);
   }
-}); //첫번째 방법 rl.on으로 반복하기
-
-function baseBallGame() {
-  rl.question(`${turn}번째 시도: `, (input) => {
-    let { s, b } = replyCheck(input, answer);
-    if (s === answerLength) {
-      console.log(`${turn}번만에 맞히셨습니다.`);
-      console.log("게임을 종료합니다");
-      rl.close();
-    } else {
-      console.log(`${b}B${s}S`);
-      turn++;
-      baseBallGame();
-    }
-  });
-} //두번째 방법 재귀사용
-baseBallGame();
+});
