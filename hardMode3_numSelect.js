@@ -11,7 +11,6 @@ const answerNumber = (answerLength) => {
     if (answer.includes(randNum)) i--;
     else answer.push(randNum);
   }
-  console.log(`answer: ${answer}`);
   return answer.join("");
 };
 

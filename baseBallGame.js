@@ -7,13 +7,12 @@ const rl = readline.createInterface({
 const answerLength = 3;
 
 function generateRandomNumber() {
-  let answer = '';
+  let answer = "";
   let num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  while(answer.length < 3){
-      let randomNum = Math.floor(Math.random() * num.length);
-      answer += num.splice(randomNum, 1)
+  while (answer.length < 3) {
+    let randomNum = Math.floor(Math.random() * num.length);
+    answer += num.splice(randomNum, 1);
   }
-  console.log(answer);  
   return answer;
 }
 

@@ -11,7 +11,6 @@ const generateRandomNumber = () => {
   let answer = [];
   for (let i = 0; i < answerLength; i++) {
     let randomNum = ~~(Math.random() * 10);
-    console.log(`${i} : randomNum은 ${randomNum}`);
     if (answer.indexOf(randomNum) < 0) {
       answer.push(randomNum);
     } else i--;
@@ -30,7 +29,6 @@ const checkAnswer = (input, answer) => {
 };
 
 let answer = generateRandomNumber();
-console.log(answer);
 let attempts = 1;
 
 console.log("💻 컴퓨터가 숫자를 생성하였습니다. 답을 맞춰보세요!");
